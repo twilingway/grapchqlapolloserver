@@ -1,10 +1,10 @@
 {
-  "name": "graphql-ts-prisma-codegen-postgres-apolloserver-tutorial",
+  "name": "graphql-ts-prisma-codegen-postgres-apolloserver",
   "version": "1.0.0",
-  "description": "Graphql setup tutorial with above libs",
+  "description": "Graphql exercise",
   "main": "index.js",
-  "repository": "https://github.com/leoroese/blog-tube",
-  "author": "Leonardo Roese",
+  "repository": "https://github.com/twilingway",
+  "author": "Glazunov Aleksei",
   "license": "MIT",
   "scripts": {
     "dev": "nodemon",
@@ -40,7 +40,9 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
-    "dotenv-safe": "^8.2.0"
+    "apollo-server": "^3.9.0",
+    "dotenv-safe": "^8.2.0",
+    "graphql": "^16.5.0"
   },
   "config": {
     "commitizen": {

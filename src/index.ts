@@ -1,7 +1,44 @@
-import dotenv from 'dotenv-safe';
-import add from '@src/math/add';
+import { ApolloServer, gql } from 'apollo-server';
 
-dotenv.config();
+const books = [
+  {
+    title: 'The First',
+    author: 'Kate Chopin',
+  },
 
-console.log(process.env.MY_NAME);
-console.log(add(1, 3));
+  {
+    title: 'The Second',
+    author: 'Paul Auster',
+  },
+];
+
+const typeDefs = gql`
+  type Book {
+    title: String
+    author: String
+  }
+  type Query {
+    books: [Book]
+  }
+`;
+
+const resolvers = {
+  Query: {
+    books: () => books,
+  },
+};
+
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  // playground: process.env.NODE_ENV !== 'production',
+  csrfPrevention: true,
+  cache: 'bounded',
+});
+
+server
+  .listen()
+  .then(({ url }) => {
+    console.log(`Server ready at :>> ${url}graphql`);
+  })
+  .catch(error => console.log('Error launching server', error));

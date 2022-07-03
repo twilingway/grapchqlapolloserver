@@ -34,6 +34,7 @@ module.exports = {
         ],
       },
     ],
+    'linebreak-style': ['error', 'windows'],
   },
   settings: {
     'import/parsers': {
