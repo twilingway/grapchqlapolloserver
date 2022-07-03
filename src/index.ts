@@ -31,7 +31,7 @@ const resolvers = {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  // playground: process.env.NODE_ENV !== 'production',
+  // playground: process.env.NODE_ENV !== 'production'
   csrfPrevention: true,
   cache: 'bounded',
 });
