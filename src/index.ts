@@ -1,4 +1,5 @@
 import { ApolloServer } from 'apollo-server';
+import { performAstCodegen } from './codegen';
 // import dotenv from 'dotenv-safe';
 import schema from './graphql/schema/schema';
 
@@ -10,6 +11,8 @@ const server = new ApolloServer({
   csrfPrevention: true,
   cache: 'bounded',
 });
+
+performAstCodegen();
 
 server
   .listen()

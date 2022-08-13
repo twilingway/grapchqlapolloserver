@@ -1,0 +1,18 @@
+type Query {
+  users: [User]
+}
+
+"""A user"""
+type User {
+  """id of the user"""
+  id: ID!
+
+  """email of the user"""
+  email: String!
+
+  """password of the user"""
+  password: String!
+
+  """role of the user"""
+  role: String!
+}
