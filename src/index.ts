@@ -1,22 +1,33 @@
 import { ApolloServer } from 'apollo-server';
+import dotenv from 'dotenv-safe';
 import { performAstCodegen } from './codegen';
-// import dotenv from 'dotenv-safe';
 import schema from './graphql/schema/schema';
+import { IApolloServerContext } from './interfaces/IApolloServerContext';
+import prisma from '@src/prisma/client';
 
-// dotenv.config();
+dotenv.config();
 
-const server = new ApolloServer({
-  schema,
-  // playground: process.env.NODE_ENV !== 'production',
-  csrfPrevention: true,
-  cache: 'bounded',
-});
+const startServer = () => {
+  performAstCodegen();
 
-performAstCodegen();
+  const context: IApolloServerContext = {
+    prisma,
+  };
 
-server
-  .listen()
-  .then(({ url }) => {
-    console.log(`Server ready at :>> ${url}graphql`);
-  })
-  .catch((error) => console.log('Error launching server', error));
+  const server = new ApolloServer({
+    schema,
+    // playground: process.env.NODE_ENV !== 'production',
+    csrfPrevention: true,
+    cache: 'bounded',
+    context,
+  });
+
+  server
+    .listen()
+    .then(({ url }) => {
+      console.log(`Server ready at :>> ${url}graphql`);
+    })
+    .catch((error) => console.log('Error launching server', error));
+};
+
+startServer();

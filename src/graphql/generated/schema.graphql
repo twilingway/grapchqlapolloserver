@@ -16,3 +16,19 @@ type User {
   """role of the user"""
   role: String!
 }
+
+type Mutation {
+  createUser(
+    """User input to be created"""
+    input: CreateUserInput!
+  ): User
+}
+
+"""Create user input"""
+input CreateUserInput {
+  """email of the user"""
+  email: String!
+
+  """password of the user"""
+  password: String!
+}

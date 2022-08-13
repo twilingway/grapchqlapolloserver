@@ -4,7 +4,7 @@ import { parse, printSchema } from 'graphql';
 import { Types } from '@graphql-codegen/plugin-helpers';
 import { codegen } from '@graphql-codegen/core';
 import path from 'path';
-// import prismaContext from '@src/lib/prisma/prismaContext';
+import prisma from './prisma/client';
 import schema from '@src/graphql/schema/schema';
 
 async function performCodegen(options: Types.GenerateOptions): Promise<void> {
@@ -19,8 +19,8 @@ export async function performAstCodegen(): Promise<void> {
   const options: Types.GenerateOptions = {
     config: {
       numericEnums: true,
-      //   contextType: prismaContext,
-      //   useIndexSignature: true,
+      contextType: { prisma },
+      useIndexSignature: true,
     },
     documents: [],
     filename: 'schema.graphql',

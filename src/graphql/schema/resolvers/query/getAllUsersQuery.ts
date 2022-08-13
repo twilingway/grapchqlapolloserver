@@ -1,27 +1,18 @@
 import { GraphQLList } from 'graphql';
+import { User } from '@prisma/client';
 import GqlUser from '@src/graphql/schema/typedefs/GqlUser';
-import { TUser } from '@src/data/types/TUser';
-
-const users: TUser[] = [
-  {
-    id: 1,
-    email: 'test1@test.ru',
-    password: '123456',
-    role: 'USER',
-  },
-  {
-    id: 1,
-    email: 'admin@test.ru',
-    password: '123456',
-    role: 'ADMIN',
-  },
-];
+import getAllUsers from '@src/data/userService';
+import { IApolloServerContext } from '@src/interfaces/IApolloServerContext';
 
 const getAllUsersQuery = {
   type: new GraphQLList(GqlUser),
-  resolve: (_source: unknown): TUser[] => {
-    console.log('_source :>> ', _source);
-    return users;
+  resolve: async (
+    _source: unknown,
+    _args: unknown,
+    _context: IApolloServerContext,
+    _info: unknown
+  ): Promise<User[]> => {
+    return getAllUsers();
   },
 };
 
